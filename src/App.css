@@ -1,0 +1,189 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #282c34;
+  padding: 12px 0;
+  width: 100%;
+}
+
+.page-wrapper {
+  margin-top: 24px;
+  padding: 0 24px 40px;
+}
+
+.page-section {
+  max-width: 1000px;
+  margin: 0 auto 24px;
+  text-align: left;
+}
+
+.page-section h1 {
+  margin-bottom: 16px;
+}
+
+.form-toggle-button,
+.submit-button {
+  background: #61dafb;
+  border: none;
+  color: #282c34;
+  cursor: pointer;
+  font-size: 1rem;
+  margin: 12px 0;
+  padding: 10px 16px;
+  border-radius: 6px;
+}
+
+.user-form {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-top: 16px;
+  padding: 20px;
+  max-width: 560px;
+}
+
+.form-group {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  font-weight: 600;
+}
+
+.form-group input {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px 12px;
+  width: 100%;
+}
+
+.nav-tabs {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-tab {
+  background: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  margin: 0 10px;
+  padding: 10px 16px;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.nav-tab:hover,
+.nav-tab.active {
+  background: #61dafb;
+  border-radius: 6px;
+  color: #282c34;
+}
+
+.page-section {
+  padding: 40px 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.page-section h1 {
+  margin-bottom: 16px;
+}
+
+.data-table {
+  margin: 24px auto;
+  border-collapse: collapse;
+  width: 90%;
+  max-width: 900px;
+  background: white;
+  color: #222;
+}
+
+.data-table th,
+.data-table td {
+  border: 1px solid #ddd;
+  padding: 10px 12px;
+}
+
+.data-table th {
+  background: #282c34;
+  color: white;
+  text-align: left;
+}
+
+.data-table tr:nth-child(even) {
+  background: #f7f7f7;
+}
+
+.data-table tr:hover {
+  background: #e8f0ff;
+}
+
+.exercise-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  text-align: left;
+}
+
+.exercise {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  background: #fafafa;
+}
+
+.exercise h3 {
+  margin-top: 0;
+}
+
+.set-heading {
+  text-align: left;
+  margin-top: 32px;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

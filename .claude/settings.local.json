@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm -v)",
+      "Read(//Users/vilask/**)",
+      "Bash(npx --yes @angular/cli@latest new angular-interview-prep --routing --style=css --skip-git --package-manager=npm --defaults)",
+      "Bash(npx vitest *)",
+      "Bash(npx tsc *)",
+      "Bash(npx ng *)",
+      "Bash([ -f \"$SETTINGS\" ])",
+      "Bash(python3 -c \"import json; json.load\\(open\\('/Users/vilask/Library/Application Support/Code/User/settings.json'\\)\\)\")",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d['projects']['angular-interview-prep']['architect']['test'], indent=2\\)\\)\")",
+      "mcp__visualize__read_me",
+      "mcp__visualize__show_widget",
+      "Bash(npm install *)",
+      "Bash(node build.js)",
+      "Bash(python3 \"/Users/vilask/Library/Application Support/Claude/local-agent-mode-sessions/skills-plugin/c6a39ab1-ec3c-4e02-b80a-337f78130243/e799b04d-18e9-4812-9f56-3dc0a5dab0b4/skills/docx/scripts/office/soffice.py\" --headless --convert-to pdf I-539_Cover_Letter_Kyadarwar.docx)",
+      "Bash(pdftoppm -jpeg -r 100 I-539_Cover_Letter_Kyadarwar.pdf page)",
+      "Bash(python3 --version; which python3.11 python3.12 python3.10 2>/dev/null; ls /usr/bin/python3* /opt/homebrew/bin/python3* 2>/dev/null)",
+      "Bash(mdfind \"kMDItemFSName == 'soffice'\")",
+      "Bash(pandoc -t markdown I-539_Cover_Letter_Kyadarwar.docx)",
+      "Bash(unzip -l I-539_Cover_Letter_Kyadarwar.docx)",
+      "Bash(unzip -p I-539_Cover_Letter_Kyadarwar.docx word/document.xml)",
+      "Bash(python3 -c \"import sys,re; data=sys.stdin.read\\(\\); texts=re.findall\\(r'<w:t[^>]*>\\([^<]*\\)</w:t>', data\\); print\\('\\\\n'.join\\(texts\\)\\)\")"
+    ]
+  }
+}
