@@ -13,18 +13,18 @@
 import { createContext, useContext } from "react";
 
 
-function Level3({ username }: { username?: string }) {
-    return <p>Hello {username}!</p>
-}
+// function Level3({ username }: { username?: string }) {
+//     return <p>Hello {username}!</p>
+// }
 
-//missed username here to pass it to next level
-function Level2({ username }: { username?: string }) {
-    return <Level3 username={username} />;
-}
+// //missed username here to pass it to next level
+// function Level2({ username }: { username?: string }) {
+//     return <Level3 username={username} />;
+// }
 
-function Level1({ username }: { username: string }) {
-    return <Level2 username={username} />
-}
+// function Level1({ username }: { username: string }) {
+//     return <Level2 username={username} />
+// }
 
 // function PropDrillingDemo() {
 //     return (

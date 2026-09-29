@@ -1,8 +1,9 @@
 import { RootState } from "../../app/store";
-import { call, put, select, takeLatest } from 'redux-saga/effects';
-import { fetchExpensesApi } from "./expensesApi";
-import { fetchExpensesRequest, fetchExpensesFailure, fetchExpensesSuccess } from "./expensesSlice";
+import { all, call, put, select, takeLatest } from 'redux-saga/effects';
+import { deleteExpenseApi, fetchExpensesApi } from "./expensesApi";
+import { fetchExpensesRequest, fetchExpensesFailure, fetchExpensesSuccess, deleteExpenseRequest } from "./expensesSlice";
 import { Expense } from "./types";
+import { PayloadAction } from "@reduxjs/toolkit";
 
 
 function* fetchExpensesWorker() {
@@ -17,7 +18,6 @@ function* fetchExpensesWorker() {
             endDate: expensesState.endDate,
             endPrice: expensesState.endPrice
         });
-
         yield put(fetchExpensesSuccess({ data: result.data, total: result.total }))
     } catch (error) {
 
@@ -26,6 +26,19 @@ function* fetchExpensesWorker() {
     }
 }
 
+function* deleteExpenseWorker(action: PayloadAction<number>) {
+    try {
+        yield call(deleteExpenseApi, action.payload);
+        yield put(fetchExpensesRequest());
+    } catch (error) {
+        const message = error instanceof Error ? error.message : 'Failed to delete expense';
+        yield put(fetchExpensesFailure(message));
+    }
+}
+
 export function* expensesSaga() {
-    yield takeLatest(fetchExpensesRequest.type, fetchExpensesWorker);
+    yield all(
+        [takeLatest(fetchExpensesRequest.type, fetchExpensesWorker),
+        takeLatest(deleteExpenseRequest.type, deleteExpenseWorker)
+        ])
 }

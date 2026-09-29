@@ -52,10 +52,14 @@ const expenseSlice = createSlice({
             state.startDate = action.payload.startDate;
             state.startPrice = action.payload.startPrice;
             state.page = 1;
+        },
+        deleteExpenseRequest: (state, action: PayloadAction<number>) => {
+            state.status = 'loading';
+            state.error = null;
         }
     }
 })
 
-export const { fetchExpensesFailure, fetchExpensesRequest, fetchExpensesSuccess, setPage, setFilters } = expenseSlice.actions;
+export const { fetchExpensesFailure, fetchExpensesRequest, fetchExpensesSuccess, setPage, setFilters, deleteExpenseRequest } = expenseSlice.actions;
 
 export default expenseSlice.reducer;

@@ -63,3 +63,14 @@ export async function fetchExpensesApi(params:
     return { data, total: filtered.length };
 
 }
+
+export async function deleteExpenseApi(id: number): Promise<{ success: boolean }> {
+    await new Promise((resolve) => setTimeout(resolve, 500));
+
+    const index = SEED_DATA.findIndex((item) => item.id === id);
+    if (index !== -1) {
+        SEED_DATA.splice(index, 1);
+    }
+    return { success: true };
+}
+

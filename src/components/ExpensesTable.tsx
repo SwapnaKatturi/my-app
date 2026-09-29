@@ -1,7 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../app/store";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
+import { Expense } from "../features/expenses/types";
+import ExpenseDetailPanel from "./ExpenseDetailPanel";
 import { fetchExpensesRequest, setFilters, setPage } from "../features/expenses/expensesSlice";
+import ExpenseRow from "./ExpensesRow";
 
 function ExpensesTable() {
     const dispatch = useDispatch<AppDispatch>();
@@ -10,6 +13,12 @@ function ExpensesTable() {
     const [draftEndPrice, setdraftEndPrice] = useState('');
     const [draftStartDate, setdraftStartDate] = useState('');
     const [draftEndDate, setdraftEndDate] = useState('');
+    const [selectedExpense, setSelectedExpense] = useState<Expense | null>(null);
+    const [savedNotes, setSavedNotes] = useState<Record<number, string>>({});
+
+    const handleSelectedExpense = useCallback((expense: Expense) => {
+        setSelectedExpense(expense);
+    }, [])
 
     const totalPages = Math.ceil(total / pageSize);
 
@@ -25,8 +34,18 @@ function ExpensesTable() {
         setdraftEndDate('');
         setdraftEndPrice('');
         dispatch(setFilters({}));
-
     }
+
+    const handleSavedNotes = useCallback((expenseId: number, notes: string) => {
+        setSavedNotes((prev) => ({ ...prev, [expenseId]: notes }))
+    }, []);
+
+    const totalAmount = useMemo(() => {
+        console.log('recalculating total amount...');
+        return items.reduce((sum, item) =>
+            sum = sum + item.amount
+            , 0)
+    }, [items])
 
     return (
         <div>
@@ -37,25 +56,31 @@ function ExpensesTable() {
                     <div>
                         <h3>Apply filters</h3>
                         <div>
-                            <label>Start Price:
-                            </label>
+                            <label>Start Price: </label>
                             <input value={draftStartPrice} onChange={(e) => setDraftStartPrice(e.target.value)} />
-                        </div>
+                        </div><br />
                         <div>
                             <label>End Price: </label>
                             <input value={draftEndPrice} onChange={(e) => setdraftEndPrice(e.target.value)} />
-                        </div>
+                        </div><br />
                         <div>
                             <label>Start Date: </label>
                             <input value={draftStartDate} onChange={(e) => setdraftStartDate(e.target.value)} />
-                        </div>
+                        </div><br />
                         <div>
-                            <label>End Date</label>
+                            <label>End Date: </label>
                             <input value={draftEndDate} onChange={(e) => setdraftEndDate(e.target.value)} />
-                        </div>
+                        </div><br />
                         <button onClick={() => dispatch(setFilters({ startDate: draftStartDate, endDate: draftEndDate, startPrice: Number(draftStartPrice), endPrice: Number(draftEndPrice) }))}>Apply filters</button>
                         <button onClick={handleClearFilter}>Clear Filters</button>
                     </div>
+
+                    <p>Total: {totalAmount}</p>
+
+                    <ExpenseDetailPanel selectedExpense={selectedExpense}
+                        savedNote={selectedExpense ? savedNotes[selectedExpense.id] ?? '' : ''} onSave={handleSavedNotes}
+                    />
+
                     <table className="data-table">
                         <thead>
                             <tr>
@@ -69,14 +94,7 @@ function ExpensesTable() {
                         </thead>
                         <tbody>
                             {items.map((item) => (
-                                <tr key={item.id}>
-                                    <td>{item.id}</td>
-                                    <td>{item.title}</td>
-                                    <td>{item.amount}</td>
-                                    <td>{item.type}</td>
-                                    <td>{item.description}</td>
-                                    <td>{item.date}</td>
-                                </tr>
+                                <ExpenseRow key={item.id} expense={item} onSelect={handleSelectedExpense} />
                             ))}
                         </tbody>
                     </table>
